@@ -5,17 +5,17 @@ RSpec.describe 'EventSubscriber' do
     before do
       Legion::Events.clear
       Legion::Settings.set_test_data({
-        react: {
-          rules: {
-            test_rule: {
-              enabled:  true,
-              source:   'test.event',
-              autonomy: 'observe',
-              chain:    ['test.runner']
-            }
-          }
-        }
-      })
+                                       react: {
+                                         rules: {
+                                           test_rule: {
+                                             enabled:  true,
+                                             source:   'test.event',
+                                             autonomy: 'observe',
+                                             chain:    ['test.runner']
+                                           }
+                                         }
+                                       }
+                                     })
       Legion::Extensions::React::Runners::React.reset!
     end
 

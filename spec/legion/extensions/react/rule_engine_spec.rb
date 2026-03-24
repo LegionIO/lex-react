@@ -5,7 +5,7 @@ require 'legion/extensions/react/rule_engine'
 RSpec.describe Legion::Extensions::React::RuleEngine do
   let(:rules_config) do
     {
-      ci_failure: {
+      ci_failure:     {
         enabled:   true,
         source:    'github.check_run.completed',
         condition: "conclusion == 'failure'",
@@ -13,16 +13,16 @@ RSpec.describe Legion::Extensions::React::RuleEngine do
         chain:     ['lex-github.runners.fetch_check_logs']
       },
       review_comment: {
-        enabled:   true,
-        source:    'github.pull_request_review_comment',
-        autonomy:  'observe',
-        chain:     ['lex-github.runners.fetch_comment']
+        enabled:  true,
+        source:   'github.pull_request_review_comment',
+        autonomy: 'observe',
+        chain:    ['lex-github.runners.fetch_comment']
       },
-      disabled_rule: {
-        enabled:   false,
-        source:    'tfe.*',
-        autonomy:  'filter',
-        chain:     ['lex-tfe.runners.check']
+      disabled_rule:  {
+        enabled:  false,
+        source:   'tfe.*',
+        autonomy: 'filter',
+        chain:    ['lex-tfe.runners.check']
       }
     }
   end

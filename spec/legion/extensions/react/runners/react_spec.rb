@@ -5,27 +5,27 @@ require 'legion/extensions/react/runners/react'
 RSpec.describe Legion::Extensions::React::Runners::React do
   before do
     Legion::Settings.set_test_data({
-      react: {
-        rules: {
-          ci_failure: {
-            enabled:   true,
-            source:    'github.check_run.completed',
-            condition: "conclusion == 'failure'",
-            autonomy:  'filter',
-            chain:     ['lex-github.runners.fetch_check_logs']
-          },
-          all_events: {
-            enabled:  true,
-            source:   'github.**',
-            autonomy: 'observe',
-            chain:    ['lex-log.runners.output']
-          }
-        },
-        max_depth:              3,
-        cooldown_seconds:       60,
-        max_reactions_per_hour: 100
-      }
-    })
+                                     react: {
+                                       rules:                  {
+                                         ci_failure: {
+                                           enabled:   true,
+                                           source:    'github.check_run.completed',
+                                           condition: "conclusion == 'failure'",
+                                           autonomy:  'filter',
+                                           chain:     ['lex-github.runners.fetch_check_logs']
+                                         },
+                                         all_events: {
+                                           enabled:  true,
+                                           source:   'github.**',
+                                           autonomy: 'observe',
+                                           chain:    ['lex-log.runners.output']
+                                         }
+                                       },
+                                       max_depth:              3,
+                                       cooldown_seconds:       60,
+                                       max_reactions_per_hour: 100
+                                     }
+                                   })
     described_class.reset!
   end
 

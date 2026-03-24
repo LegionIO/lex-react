@@ -6,16 +6,19 @@ require 'bundler/setup'
 module Legion
   module Extensions
     module Core; end
+
     module Actors
       class Every; end
       class Subscription; end
     end
   end
+
   module Transport
     class Exchange; end
     class Queue; end
     class Message; end
   end
+
   module Settings
     def self.[](key)
       @data ||= {}
@@ -31,6 +34,7 @@ module Legion
       @data = data
     end
   end
+
   module Events
     class << self
       def listeners
@@ -70,11 +74,12 @@ module Legion
       end
     end
   end
+
   module Logging
-    def self.debug(msg) = nil
-    def self.info(msg) = nil
-    def self.warn(msg) = nil
-    def self.error(msg) = nil
+    def self.debug(_msg) = nil
+    def self.info(_msg) = nil
+    def self.warn(_msg) = nil
+    def self.error(_msg) = nil
   end
 end
 
