@@ -4,6 +4,7 @@ RSpec.describe 'EventSubscriber' do
   describe 'Legion::Extensions::React.subscribe!' do
     before do
       Legion::Events.clear
+      Legion::Extensions::React.instance_variable_set(:@subscription, nil)
       Legion::Settings.set_test_data({
                                        react: {
                                          rules: {
