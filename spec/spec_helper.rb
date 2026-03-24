@@ -60,6 +60,14 @@ module Legion
       def clear
         @listeners = nil
       end
+
+      def listener_count(event_name = nil)
+        if event_name
+          listeners[event_name.to_s].size
+        else
+          listeners.values.sum(&:size)
+        end
+      end
     end
   end
   module Logging
