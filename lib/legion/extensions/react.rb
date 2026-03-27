@@ -18,6 +18,10 @@ module Legion
           false
         end
 
+        def remote_invocable?
+          false
+        end
+
         def subscribe!
           return unless defined?(Legion::Events)
 
