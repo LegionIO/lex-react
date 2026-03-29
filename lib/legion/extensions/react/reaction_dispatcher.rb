@@ -26,6 +26,7 @@ module Legion
 
           { success: true, rule_id: rule[:id], action: :dispatched, chain: rule[:chain] }
         rescue StandardError => e
+          log.error "[React] dispatch failed rule=#{rule[:id]}: #{e.message}"
           { success: false, rule_id: rule[:id], error: e.message }
         end
 
