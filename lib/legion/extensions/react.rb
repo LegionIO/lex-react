@@ -14,6 +14,8 @@ module Legion
       extend Legion::Extensions::Core if Legion::Extensions.const_defined?(:Core)
 
       class << self
+        include Legion::Extensions::Helpers::Lex if defined?(Legion::Extensions::Helpers::Lex)
+
         def data_required?
           false
         end
@@ -30,7 +32,7 @@ module Legion
 
             Runners::React.handle_event(event: event)
           rescue StandardError => e
-            Legion::Logging.warn "[React] event handler error: #{e.message}" if defined?(Legion::Logging)
+            log.warn "[React] event handler error: #{e.message}"
           end
         end
 
@@ -39,6 +41,12 @@ module Legion
 
           Legion::Events.off('*', @subscription)
           @subscription = nil
+        end
+
+        unless method_defined?(:log)
+          def log
+            Legion::Logging
+          end
         end
       end
 

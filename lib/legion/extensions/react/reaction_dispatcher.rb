@@ -44,19 +44,23 @@ module Legion
                               source_event: event[:event],
                               autonomy:     rule[:autonomy])
         rescue StandardError => e
-          Legion::Logging.warn "[React] dispatch error: #{e.message}" if defined?(Legion::Logging)
+          log.warn "[React] dispatch error: #{e.message}"
         end
 
         def log_observed(rule, event)
-          return unless defined?(Legion::Logging)
-
-          Legion::Logging.info "[React] OBSERVE rule=#{rule[:id]} event=#{event[:event]} chain=#{rule[:chain]}"
+          log.info "[React] OBSERVE rule=#{rule[:id]} event=#{event[:event]} chain=#{rule[:chain]}"
         end
 
         def log_blocked(rule, event)
-          return unless defined?(Legion::Logging)
+          log.warn "[React] BLOCKED rule=#{rule[:id]} event=#{event[:event]} (loop prevention)"
+        end
 
-          Legion::Logging.warn "[React] BLOCKED rule=#{rule[:id]} event=#{event[:event]} (loop prevention)"
+        include Legion::Extensions::Helpers::Lex if defined?(Legion::Extensions::Helpers::Lex)
+
+        unless method_defined?(:log)
+          def log
+            Legion::Logging
+          end
         end
       end
     end

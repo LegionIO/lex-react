@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.2] - 2026-03-29
+
+### Changed
+- Migrate logging calls to `log.*` via `Helpers::Lex` tagged logger; fallback to `Legion::Logging` when helper is unavailable
+
 ## [0.1.1] - 2026-03-26
 
 ### Changed
