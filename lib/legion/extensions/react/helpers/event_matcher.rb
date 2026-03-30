@@ -14,7 +14,7 @@ module Legion
                                .gsub('__DS__', '\..*')
             regex_str = "\\A#{regex_str}\\z"
             Regexp.new(regex_str).match?(event_name)
-          rescue RegexpError
+          rescue RegexpError => _e
             false
           end
 
@@ -36,7 +36,7 @@ module Legion
             else
               false
             end
-          rescue StandardError
+          rescue StandardError => _e
             false
           end
         end

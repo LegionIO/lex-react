@@ -17,7 +17,7 @@ module Legion
                          {}
                        end
           new(rules_hash)
-        rescue StandardError
+        rescue StandardError => _e
           new({})
         end
 

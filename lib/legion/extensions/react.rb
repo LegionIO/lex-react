@@ -11,7 +11,7 @@ require_relative 'react/runners/react'
 module Legion
   module Extensions
     module React
-      extend Legion::Extensions::Core if Legion::Extensions.const_defined?(:Core)
+      extend Legion::Extensions::Core if Legion::Extensions.const_defined?(:Core, false)
 
       class << self
         include Legion::Extensions::Helpers::Lex if defined?(Legion::Extensions::Helpers::Lex)
@@ -27,7 +27,7 @@ module Legion
         def subscribe!
           return unless defined?(Legion::Events)
 
-          @subscription ||= Legion::Events.on('*') do |event|
+          @subscribe ||= Legion::Events.on('*') do |event| # rubocop:disable ThreadSafety/ClassInstanceVariable
             next if event[:event].to_s.start_with?('react.')
 
             Runners::React.handle_event(event: event)
@@ -37,10 +37,10 @@ module Legion
         end
 
         def unsubscribe!
-          return unless @subscription && defined?(Legion::Events)
+          return unless @subscribe && defined?(Legion::Events) # rubocop:disable ThreadSafety/ClassInstanceVariable
 
-          Legion::Events.off('*', @subscription)
-          @subscription = nil
+          Legion::Events.off('*', @subscribe) # rubocop:disable ThreadSafety/ClassInstanceVariable
+          @subscribe = nil # rubocop:disable ThreadSafety/ClassInstanceVariable
         end
 
         unless method_defined?(:log)
@@ -50,7 +50,7 @@ module Legion
         end
       end
 
-      require_relative 'react/actors/event_subscriber' if defined?(Legion::Extensions::Actors::Once)
+      require_relative 'react/actors/event_subscriber'
     end
   end
 end

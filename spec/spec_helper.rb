@@ -8,15 +8,16 @@ module Legion
     module Core; end
 
     module Actors
-      class Every; end
-      class Subscription; end
+      class Every; end # rubocop:disable Lint/EmptyClass
+      class Subscription; end # rubocop:disable Lint/EmptyClass
+      class Once; end # rubocop:disable Lint/EmptyClass
     end
   end
 
   module Transport
-    class Exchange; end
-    class Queue; end
-    class Message; end
+    class Exchange; end # rubocop:disable Lint/EmptyClass
+    class Queue; end # rubocop:disable Lint/EmptyClass
+    class Message; end # rubocop:disable Lint/EmptyClass
   end
 
   module Settings
@@ -30,7 +31,7 @@ module Legion
       keys.reduce(@data) { |h, k| h.is_a?(Hash) ? h[k] : nil }
     end
 
-    def self.set_test_data(data)
+    def self.set_test_data(data) # rubocop:disable Naming/AccessorMethodName
       @data = data
     end
   end
