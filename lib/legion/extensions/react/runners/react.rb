@@ -5,7 +5,7 @@ module Legion
     module React
       module Runners
         module React
-          module_function
+          extend self
 
           def handle_event(event:)
             engine     = rule_engine
@@ -45,6 +45,8 @@ module Legion
             @reaction_dispatcher = nil
           end
 
+          private
+
           def rule_engine
             @rule_engine ||= RuleEngine.from_settings
           end
@@ -68,11 +70,9 @@ module Legion
             return {} unless defined?(Legion::Settings) && !Legion::Settings[:react].nil?
 
             Legion::Settings[:react] || {}
-          rescue StandardError
+          rescue StandardError => _e
             {}
           end
-
-          private_class_method :rule_engine, :loop_breaker, :reaction_dispatcher, :react_settings
         end
       end
     end
